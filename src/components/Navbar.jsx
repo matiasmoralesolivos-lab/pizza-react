@@ -4,14 +4,14 @@ const Navbar = () => {
 
   return (
     <nav>
-  <div className="container bg-dark text-white d-flex justify-content-between align-items-center py-2 rounded">
+  <div className="container-fluid bg-dark text-white d-flex justify-content-between align-items-center py-3 rounded">
 
-    <div className="d-flex align-items-center gap-3">
+    <div className="container d-flex align-items-center gap-3">
       <h5 className="mb-0">Pizzeria mamma mia!!!!</h5>
 
       <div>
         <button className="btn btn-outline-light me-2">🍕 Home</button>
-        <button className="btn btn-outline-light me-2">🔐 Login</button>
+        <button  className="btn btn-outline-light me-2">🔐 Login</button>
         <button className="btn btn-outline-light me-2">🔐 Register</button>
       </div>
     </div>
