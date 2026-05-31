@@ -9,11 +9,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 
 import CartProvider from "./context/CartContext";
+import UserProvider from "./context/UserContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <CartProvider>
-      <App />
-    </CartProvider>
+    <UserProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </UserProvider>
   </BrowserRouter>
 );

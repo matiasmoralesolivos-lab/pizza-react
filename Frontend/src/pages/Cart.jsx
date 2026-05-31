@@ -1,19 +1,14 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 const Cart = () => {
-  const {
-    cart,
-    increaseQuantity,
-    decreaseQuantity,
-    total,
-  } = useContext(CartContext);
+  const { cart, increaseQuantity, decreaseQuantity, total } =
+    useContext(CartContext);
 
+  const { token } = useContext(UserContext);
   return (
-    <div
-      className="container mt-4"
-      style={{ maxWidth: "700px" }}
-    >
+    <div className="container mt-4" style={{ maxWidth: "700px" }}>
       <h2>Detalles del pedido</h2>
 
       {cart.map((pizza) => (
@@ -34,24 +29,17 @@ const Cart = () => {
               }}
             />
 
-            <span className="text-capitalize">
-              {pizza.name}
-            </span>
+            <span className="text-capitalize">{pizza.name}</span>
           </div>
 
           {/* precio */}
-          <span>
-            $
-            {pizza.price.toLocaleString("es-CL")}
-          </span>
+          <span>${pizza.price.toLocaleString("es-CL")}</span>
 
           {/* controles */}
           <div className="d-flex align-items-center gap-2">
             <button
               className="btn btn-outline-danger btn-sm"
-              onClick={() =>
-                decreaseQuantity(pizza.id)
-              }
+              onClick={() => decreaseQuantity(pizza.id)}
             >
               -
             </button>
@@ -60,9 +48,7 @@ const Cart = () => {
 
             <button
               className="btn btn-outline-primary btn-sm"
-              onClick={() =>
-                increaseQuantity(pizza.id)
-              }
+              onClick={() => increaseQuantity(pizza.id)}
             >
               +
             </button>
@@ -70,14 +56,14 @@ const Cart = () => {
         </div>
       ))}
 
-      <h3 className="mt-4">
-        Total: $
-        {total.toLocaleString("es-CL")}
-      </h3>
+      <h3 className="mt-4">Total: ${total.toLocaleString("es-CL")}</h3>
 
-      <button className="btn btn-dark mt-3">
-        Pagar
-      </button>
+      <button
+  className="btn btn-dark mt-3"
+  disabled={!token}
+>
+  Pagar
+</button>
     </div>
   );
 };
