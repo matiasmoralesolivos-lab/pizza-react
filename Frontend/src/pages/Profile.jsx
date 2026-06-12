@@ -1,11 +1,26 @@
+import { useContext, useEffect } from "react";
+import { UserContext } from "../context/UserContext";
+
 const Profile = () => {
+  const { email, logout, getProfile, token } =
+    useContext(UserContext);
+
+  useEffect(() => {
+    if (token) {
+      getProfile();
+    }
+  }, []);
+
   return (
     <div className="container mt-5">
       <h2>Perfil</h2>
 
-      <p>Email: usuario@correo.com</p>
+      <p>Email: {email}</p>
 
-      <button className="btn btn-dark">
+      <button
+        className="btn btn-dark"
+        onClick={logout}
+      >
         Cerrar sesión
       </button>
     </div>

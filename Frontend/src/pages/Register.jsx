@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 function Register() {
+  const { register } = useContext(UserContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (evento) => {
+  const handleSubmit = async (evento) => {
     evento.preventDefault();
 
     if (
@@ -32,8 +35,11 @@ function Register() {
       return;
     }
 
-    alert("Registro exitoso");
-    console.log("Formulario enviado");
+    const success = await register(email, password);
+
+    if (success) {
+      alert("Registro exitoso");
+    }
   };
 
   return (
@@ -57,9 +63,7 @@ function Register() {
         id="email"
         placeholder="Correo electrónico"
         value={email}
-        onChange={(evento) =>
-          setEmail(evento.target.value)
-        }
+        onChange={(e) => setEmail(e.target.value)}
       />
 
       <br />
@@ -75,9 +79,7 @@ function Register() {
         id="password"
         placeholder="Contraseña"
         value={password}
-        onChange={(evento) =>
-          setPassword(evento.target.value)
-        }
+        onChange={(e) => setPassword(e.target.value)}
       />
 
       <br />
@@ -93,8 +95,8 @@ function Register() {
         id="confirmPassword"
         placeholder="Confirmar contraseña"
         value={confirmPassword}
-        onChange={(evento) =>
-          setConfirmPassword(evento.target.value)
+        onChange={(e) =>
+          setConfirmPassword(e.target.value)
         }
       />
 
